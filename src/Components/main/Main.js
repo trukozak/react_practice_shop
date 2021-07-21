@@ -1,19 +1,19 @@
 import React from "react";
 import data from "../../data";
-import LaptopList from "../laptopList/LaptopList";
-import PhoneList from "../phoneList/PhoneList";
+import ProductList from "../productList/ProductList";
 import Section from "../section/Section";
+import { MainStyled } from "./MainStyled";
 
 const Main = () => {
   return (
-    <>
+    <MainStyled>
       <Section title={"Мобильные телефоны"}>
-        <PhoneList phones={data.phones} />
+        <ProductList products={data.phones} />
       </Section>
       <Section title={"Ноутбуки"}>
-        <LaptopList laptops={data.laptops} />
+        <ProductList products={data.laptops} />
       </Section>
-    </>
+    </MainStyled>
   );
 };
 
