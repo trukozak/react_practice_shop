@@ -33,6 +33,7 @@ class Main extends Component {
           <CartList
             cart={this.state.cart}
             removeFromCart={this.removeFromCart}
+            removeAllFromCart={this.removeAllFromCart}
           />
         </Section>
         <Section title={"Мобильные телефоны"}>
