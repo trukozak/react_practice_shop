@@ -1,18 +1,23 @@
 import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  text-transform: uppercase;
   height: 60px;
   border-bottom: 3px solid ${(props) => props.colors.darkColors.main};
   background-color: ${(props) => props.colors.darkColors.background};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 
   .headerLogo {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     color: ${(props) => props.colors.darkColors.main};
+    text-transform: uppercase;
+  }
+  .burgerMenu {
+    fill: ${(props) => props.colors.darkColors.main};
+    width: 40px;
+    height: 40px;
   }
 `;
