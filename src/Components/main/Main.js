@@ -1,20 +1,38 @@
 import React, { Component } from "react";
-import data from "../../data";
 import ProductList from "../productList/ProductList";
 import Section from "../section/Section";
 import { MainStyled } from "./MainStyled";
 import CartList from "../cartList/СartList";
 import AdvForm from "../admin/AdvForm";
+import { detAllAdvByCategory } from "../../services/Api";
 
+const getDataByCategory = async (category) => {
+  const response = await detAllAdvByCategory(category);
+  return response.data
+    ? Object.keys(response.data).map((key) => ({
+        id: key,
+        ...response.data[key],
+      }))
+    : [];
+};
 class Main extends Component {
   state = {
     cart: [],
-    ...data,
+    products: { phones: [], laptops: [] },
   };
+
+  async componentDidMount() {
+    const phones = await getDataByCategory("phones");
+    const laptops = await getDataByCategory("laptops");
+    this.setState({ products: { laptops, phones } });
+  }
 
   addNewAdv = (product) => {
     this.setState((prev) => ({
-      [product.category]: [...prev[product.category], product],
+      products: {
+        ...prev.products,
+        [product.category]: [...prev.products[product.category], product],
+      },
     }));
   };
 
@@ -38,7 +56,7 @@ class Main extends Component {
     return (
       <MainStyled>
         <Section title="Администрирование">
-          <AdvForm addNewAdv={this.addNewAdv }/>
+          <AdvForm addNewAdv={this.addNewAdv} />
         </Section>
         <Section title={"Корзина"}>
           <CartList
@@ -49,13 +67,13 @@ class Main extends Component {
         </Section>
         <Section title={"Мобильные телефоны"}>
           <ProductList
-            products={this.state.phones}
+            products={this.state.products.phones}
             addToCart={this.addToCart}
           />
         </Section>
         <Section title={"Ноутбуки"}>
           <ProductList
-            products={this.state.laptops}
+            products={this.state.products.laptops}
             addToCart={this.addToCart}
           />
         </Section>
