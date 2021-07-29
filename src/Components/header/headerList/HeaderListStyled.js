@@ -41,4 +41,7 @@ export const HeaderListStyled = styled.ul`
     text-transform: uppercase;
     text-decoration: none;
   }
+  .activeHeaderListLink {
+    color: ${(props) => props.colors.darkColors.active};
+  }
 `;

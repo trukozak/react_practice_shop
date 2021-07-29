@@ -5,6 +5,8 @@ import { MainStyled } from "./MainStyled";
 import CartList from "../cartList/СartList";
 import AdvForm from "../admin/AdvForm";
 import { detAllAdvByCategory } from "../../services/Api";
+import { Route, Switch } from "react-router-dom";
+import { mainRoutes } from "../../routes/mainRoutes";
 
 const getDataByCategory = async (category) => {
   const response = await detAllAdvByCategory(category);
@@ -55,28 +57,16 @@ class Main extends Component {
   render() {
     return (
       <MainStyled>
-        <Section title="Администрирование">
-          <AdvForm addNewAdv={this.addNewAdv} />
-        </Section>
-        <Section title={"Корзина"}>
-          <CartList
-            cart={this.state.cart}
-            removeFromCart={this.removeFromCart}
-            removeAllFromCart={this.removeAllFromCart}
-          />
-        </Section>
-        <Section title={"Мобильные телефоны"}>
-          <ProductList
-            products={this.state.products.phones}
-            addToCart={this.addToCart}
-          />
-        </Section>
-        <Section title={"Ноутбуки"}>
-          <ProductList
-            products={this.state.products.laptops}
-            addToCart={this.addToCart}
-          />
-        </Section>
+        <Switch>
+          {mainRoutes.map((route) => (
+            <Route
+              path={route.path}
+              exact={route.exact}
+              component={route.component}
+              key={route.path}
+            />
+          ))}
+        </Switch>
       </MainStyled>
     );
   }

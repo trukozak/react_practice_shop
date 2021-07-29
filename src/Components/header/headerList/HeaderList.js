@@ -1,5 +1,6 @@
 import React from "react";
-import mainRoutes from "../../../routes/mainRoutes";
+import { NavLink } from "react-router-dom";
+import { mainRoutes } from "../../../routes/mainRoutes";
 import colors from "../../../styles/colors";
 import { HeaderListStyled } from "./HeaderListStyled";
 
@@ -8,9 +9,14 @@ const HeaderList = ({ language = "en" }) => {
     <HeaderListStyled colors={colors}>
       {mainRoutes.map((item) => (
         <li className="headerListItem" key={item.path}>
-          <a className="headerListLink" href={item.path}>
+          <NavLink
+            to={item.path}
+            className="headerListLink"
+            activeClassName="activeHeaderListLink"
+            exact={item.exact}
+          >
             {item.name[language]}
-          </a>
+          </NavLink>
         </li>
       ))}
     </HeaderListStyled>
