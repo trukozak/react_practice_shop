@@ -12,7 +12,10 @@ const ProductsPage = ({ match }) => {
               <NavLink
                 className="navigationListItemAnchor"
                 activeClassName="activeNavigationListItemAnchor"
-                to={match.url + route.path}
+                to={{
+                  pathname: match.url + route.path,
+                  state: { category: route.category },
+                }}
                 exact={route.exact}
               >
                 {route.name}

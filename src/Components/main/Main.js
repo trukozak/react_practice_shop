@@ -4,12 +4,12 @@ import Section from "../section/Section";
 import { MainStyled } from "./MainStyled";
 import CartList from "../cartList/СartList";
 import AdvForm from "../admin/AdvForm";
-import { detAllAdvByCategory } from "../../services/Api";
+import { getAllAdvByCategory } from "../../services/Api";
 import { Route, Switch } from "react-router-dom";
 import { mainRoutes } from "../../routes/mainRoutes";
 
 const getDataByCategory = async (category) => {
-  const response = await detAllAdvByCategory(category);
+  const response = await getAllAdvByCategory(category);
   return response.data
     ? Object.keys(response.data).map((key) => ({
         id: key,

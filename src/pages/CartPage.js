@@ -1,14 +1,10 @@
-import CartListItem from "../Components/cartList/cartListItem/CartListItem";
+import CartList from "../Components/cartList/СartList";
 import Section from "../Components/section/Section";
 
 const CartPage = () => {
   return (
     <Section title={"Корзина"}>
-      {/* <CartListItem
-        cart={this.state.cart}
-        removeFromCart={this.removeFromCart}
-        removeAllFromCart={this.removeAllFromCart}
-      /> */}
+      <CartList />
     </Section>
   );
 };
