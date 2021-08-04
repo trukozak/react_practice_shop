@@ -10,7 +10,6 @@ class ProductList extends Component {
     const res = await getAllAdvByCategory(this.props.category);
     this.props.category === "laptops" && this.props.getLaptops(res);
     this.props.category === "phones" && this.props.getPhones(res);
-    console.log("🚀 ~ res", res);
   }
 
   render() {

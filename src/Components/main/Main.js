@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ProductList from "../productList/ProductList";
-import Section from "../section/Section";
+// import ProductList from "../productList/ProductList";
+// import Section from "../section/Section";
 import { MainStyled } from "./MainStyled";
-import CartList from "../cartList/СartList";
-import AdvForm from "../admin/AdvForm";
+// import CartList from "../cartList/СartList";
+// import AdvForm from "../admin/AdvForm";
 import { getAllAdvByCategory } from "../../services/Api";
 import { Route, Switch } from "react-router-dom";
 import { mainRoutes } from "../../routes/mainRoutes";
