@@ -8,6 +8,7 @@ import {
   productsByCategory,
   resetError,
   setError,
+  setFilter,
   setLoader,
 } from "./productsAction";
 
@@ -44,7 +45,7 @@ const productsItemsReducer = createReducer(
 );
 
 const productsLoaderReducer = createReducer(false, {
-  [setLoader]: (state) => "!state",
+  [setLoader]: (state) => !state,
 });
 
 const productsErrorReducer = createReducer("", {
@@ -52,11 +53,15 @@ const productsErrorReducer = createReducer("", {
   [resetError]: () => "",
 });
 
+const productsFilterReducer = createReducer("", {
+  [setFilter]: (_, { payload }) => payload,
+});
 
 const productsReducer = combineReducers({
   items: productsItemsReducer,
   isLoading: productsLoaderReducer,
   error: productsErrorReducer,
+  filter: productsFilterReducer,
 });
 
 export default productsReducer;

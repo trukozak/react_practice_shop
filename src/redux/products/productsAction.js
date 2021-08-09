@@ -9,4 +9,5 @@ export const setError = createAction("products/setError");
 export const resetError = createAction("products/resetError");
 export const setLoader = createAction("products/setLoader");
 export const productsByCategory = createAction("products/productsByCategory")
+export const setFilter = createAction("products/setFilter");
 
