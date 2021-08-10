@@ -44,4 +44,11 @@ export const mainRoutes = [
     component: AuthPage,
     exact: true,
   },
+  {
+    name: { en: "login", ua: "Реєстрація", ru: "Регистрация" },
+    path: "/login",
+    icon: "",
+    component: AuthPage,
+    exact: true,
+  },
 ];
