@@ -1,32 +1,27 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { ModalContainer } from "./ModalStyled";
 
-class Modal extends Component {
-  state = {};
-  componentDidMount() {
-    window.addEventListener("keydown", this.handleEsc);
+const Modal = ({ handleCloseModal, children }) => {
+  useEffect(() => {
+    window.addEventListener("keydown", handleEsc);
     const body = document.querySelector("body");
     body.style.overflow = "hidden";
-  }
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+      const body = document.querySelector("body");
+      body.style.overflow = "auto";
+    };
+  });
 
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.handleEsc);
-    const body = document.querySelector("body");
-    body.style.overflow = "auto";
-  }
+  const handleEsc = (e) => e.code === "Escape" && handleCloseModal();
 
-  handleEsc = (e) => e.code === "Escape" && this.props.handleCloseModal();
+  const handleClick = (e) => e.target === e.currentTarget && handleCloseModal();
 
-  handleClick = (e) =>
-    e.target === e.currentTarget && this.props.handleCloseModal();
-
-  render() {
-    return (
-      <ModalContainer onClick={this.handleClick}>
-        <div className="modal">{this.props.children}</div>
-      </ModalContainer>
-    );
-  }
-}
+  return (
+    <ModalContainer onClick={handleClick}>
+      <div className="modal">{children}</div>
+    </ModalContainer>
+  );
+};
 
 export default Modal;

@@ -1,51 +1,52 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import colors from "../../styles/colors";
 import HeaderList from "./headerList/HeaderList";
-import { HeaderStyled } from "./HeaderStyled";
 import sprite from "../../icons/sprite.svg";
 import Modal from "../Modal/Modal";
+import { HeaderStyled } from "./HeaderStyled";
 
-class Header extends Component {
-  state = { width: window.innerWidth, breakPoint: 768, isModalOpen: false };
+const initialState = {
+  width: window.innerWidth,
+  breakPoint: 768,
+  isModalOpen: false,
+};
+const Header = () => {
+  const [state, setState] = useState(initialState);
 
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResizeWindow);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResizeWindow);
-  }
-  handleResizeWindow = () => {
-    this.setState({ width: window.innerWidth });
+  useEffect(() => {
+    window.addEventListener("resize", handleResizeWindow);
+
+    return () => {
+      window.removeEventListener("resize", handleResizeWindow);
+    };
+  });
+  const handleResizeWindow = () => {
+    setState((prev) => ({ ...prev, width: window.innerWidth }));
   };
-  setOpenModal = () => {
-    this.setState((prev) => ({
-      isModalOpen: !prev.isModalOpen,
-    }));
+  const setOpenModal = () => {
+    setState((prev) => ({ ...prev, isModalOpen: !prev.isModalOpen }));
   };
-  render() {
-    const { width, breakPoint, isModalOpen } = this.state;
-    return (
-      <>
-        <HeaderStyled colors={colors}>
-          <h2 className="headerLogo">Logo</h2>
-          {width > breakPoint ? (
-            <nav>
-              <HeaderList />
-            </nav>
-          ) : (
-            <svg className="burgerMenu" onClick={this.setOpenModal}>
-              <use href={sprite + "#icon-menu_40px"} />
-            </svg>
-          )}
-        </HeaderStyled>
-        {isModalOpen && (
-          <Modal handleCloseModal={this.setOpenModal}>
+  return (
+    <>
+      <HeaderStyled colors={colors}>
+        <h2 className="headerLogo">Logo</h2>
+        {state.width > state.breakPoint ? (
+          <nav>
             <HeaderList />
-          </Modal>
+          </nav>
+        ) : (
+          <svg className="burgerMenu" onClick={setOpenModal}>
+            <use href={sprite + "#icon-menu_40px"} />
+          </svg>
         )}
-      </>
-    );
-  }
-}
+      </HeaderStyled>
+      {state.isModalOpen && (
+        <Modal handleCloseModal={setOpenModal}>
+          <HeaderList />
+        </Modal>
+      )}
+    </>
+  );
+};
 
 export default Header;

@@ -44,4 +44,12 @@ export const HeaderListStyled = styled.ul`
   .activeHeaderListLink {
     color: ${(props) => props.colors.darkColors.active};
   }
+  button {
+    cursor: pointer;
+    padding: 5px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 6px;
+  }
 `;

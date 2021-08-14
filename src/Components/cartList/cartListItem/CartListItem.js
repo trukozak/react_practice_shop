@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../../redux/cart/cartActions";
 
-const CartListItem = ({ name, price, id, removeFromCart }) => {
+const CartListItem = ({ name, price, id }) => {
+  const dispatch = useDispatch();
   const remove = () => {
-    removeFromCart(id);
+    dispatch(removeFromCart(id));
   };
   return (
     <li>

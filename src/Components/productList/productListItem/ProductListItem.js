@@ -1,13 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/cart/cartActions";
 import colors from "../../../styles/colors";
 import { ProductListItemStyled } from "./ProductListItemStyled";
 
-const ProductListItem = ({ product, addToCart }) => {
-  const { id, name, image, description, isSale, price } = product;
+const ProductListItem = ({ id, name, image, description, isSale, price }) => {
+  const dispatch = useDispatch();
   const addProduct = () => {
-    addToCart({ name, price, id });
+    dispatch(addToCart({ name, price, id }));
   };
   return (
     <ProductListItemStyled colors={colors}>
@@ -34,4 +34,4 @@ const ProductListItem = ({ product, addToCart }) => {
   );
 };
 
-export default connect(null, { addToCart })(ProductListItem);
+export default ProductListItem;
